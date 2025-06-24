@@ -46,7 +46,7 @@ Create a file at `app/config.py`:
 ```python
 MQTT_BROKER = "localhost"
 MQTT_PORT = 1883
-MQTT_TOPICS = "sensor/piezo"
+MQTT_TOPICS = ("sensor/piezo", 0)
 ```
 
 ---
