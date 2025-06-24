@@ -8,8 +8,10 @@ router = APIRouter()
 async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
     websocket_clients.add(websocket)
+    print(f"Client connected. Total: {len(websocket_clients)}")
     try:
         while True:
-            await websocket.receive_text()  # Untuk jaga koneksi tetap hidup
+            await websocket.receive_text()  # keep-alive
     except:
+        print("Client disconnected.")
         websocket_clients.remove(websocket)

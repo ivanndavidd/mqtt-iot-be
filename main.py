@@ -1,12 +1,26 @@
-import uvicorn
-from fastapi import FastAPI
-from app.api import router
+from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from app.mqtt_client import run_mqtt
+from app.storage import websocket_clients
+import asyncio
 
 app = FastAPI()
-app.include_router(router)
 
-run_mqtt()
+# WebSocket endpoint
+@app.websocket("/ws")
+async def websocket_endpoint(websocket: WebSocket):
+    await websocket.accept()
+    websocket_clients.add(websocket)
+    print(f"Client connected. Total: {len(websocket_clients)}")
 
-if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    try:
+        while True:
+            await websocket.receive_text()  # keep connection alive
+    except WebSocketDisconnect:
+        websocket_clients.remove(websocket)
+        print(f"Client disconnected. Total: {len(websocket_clients)}")
+
+# MQTT start during FastAPI startup
+@app.on_event("startup")
+async def startup_event():
+    loop = asyncio.get_running_loop()
+    run_mqtt(loop)
