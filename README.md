@@ -130,7 +130,3 @@ ws.onmessage = (event) => {
 - Suitable for real-time dashboards or volatile sensor streams.
 
 ---
-
-## 📜 License
-
-MIT License — Feel free to use and modify.
