@@ -13,6 +13,7 @@ def save_data(topic, payload):
         data_log.pop(0)
 
 async def broadcast_to_clients(payload):
+    # print("Broadcasting to clients:", payload)
     for ws in list(websocket_clients):
         try:
             await ws.send_text(payload)
