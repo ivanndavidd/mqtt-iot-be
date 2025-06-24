@@ -11,7 +11,6 @@ A lightweight backend service for real-time MQTT data streaming using FastAPI an
 
 ## 📡 Architecture
 
-```mermaid
 graph TD
   ESP32 -->|publish| Mosquitto
   Mosquitto -->|subscribe| FastAPI Backend
