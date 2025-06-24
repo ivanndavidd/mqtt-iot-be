@@ -25,6 +25,6 @@ Install all lib below using pip
 
 ## config.py
 make a file of /app/config.py, with below required
-MQTT_BROKER = "localhost"
-MQTT_PORT = 1883
-MQTT_TOPICS = "sensor/piezo"
+- MQTT_BROKER = "localhost"
+- MQTT_PORT = 1883
+- MQTT_TOPICS = "sensor/piezo"
