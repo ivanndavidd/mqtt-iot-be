@@ -1,10 +1,10 @@
 import paho.mqtt.client as mqtt
-from app.config import MQTT_BROKER, MQTT_PORT, MQTT_TOPIC
+from app.config import MQTT_BROKER, MQTT_PORT, MQTT_TOPICS
 from app.storage import save_data, broadcast_to_clients
 
 def on_connect(client, userdata, flags, rc):
     print(" Connected with result code " + str(rc))
-    client.subscribe(MQTT_TOPIC)
+    client.subscribe(MQTT_TOPICS)
 
 
 def on_message(client, userdata, msg):
